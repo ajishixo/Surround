@@ -1,0 +1,8 @@
+object TToolData
+  Title = 'doublequotes'
+  ExeFile = 'Tool\surround\doublequotes.dms'
+  Visible = False
+  PopVisible = False
+  ShortCut = 8242
+  InitFlg = True
+end

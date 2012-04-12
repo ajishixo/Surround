@@ -1,0 +1,8 @@
+object TToolData
+  Title = 'quotes'
+  ExeFile = 'Tool\surround\quotes.dms'
+  Visible = False
+  PopVisible = False
+  ShortCut = 8247
+  InitFlg = True
+end

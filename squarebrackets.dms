@@ -1,0 +1,11 @@
+/*
+ *  squarebrackets.dms    by ajishixo   2012”N03ŒŽ18“ú
+ */
+
+import Surround;
+
+var leftchar = "[",
+    rightchar = "]",
+    condition = {};
+
+Surround.exec(leftchar, rightchar, condition);

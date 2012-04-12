@@ -1,0 +1,11 @@
+/*
+ *  quotes.dms   by ajishixo     2012”N04ŒŽ11“ú
+ */
+
+import Surround;
+
+var leftchar = "'",
+    rightchar = "'",
+    condition = {};
+
+Surround.exec(leftchar, rightchar, condition);

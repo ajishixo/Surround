@@ -1,0 +1,8 @@
+object TToolData
+  Title = 'roundbrackets'
+  ExeFile = 'Tool\surround\roundbrackets.dms'
+  Visible = False
+  PopVisible = False
+  ShortCut = 8248
+  InitFlg = True
+end

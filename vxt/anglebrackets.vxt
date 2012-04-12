@@ -1,0 +1,8 @@
+object TToolData
+  Title = 'anglebrackets'
+  ExeFile = 'Tool\surround\anglebrackets.dms'
+  Visible = False
+  PopVisible = False
+  ShortCut = 8380
+  InitFlg = True
+end

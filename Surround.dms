@@ -1,0 +1,102 @@
+/*
+ * Surround.dms     by ajishixo     2012年03月18日
+ *
+ * [Usage]
+ *    import Surround;
+ *    var leftchar = "{",
+ *        rightchar = "}",
+ *        condition = {
+ *            'DMSの設定': {
+ *                reservedWords: [
+ *                     class, function, if, else, foreach, while
+ *                ],
+ *                openForWord: true,
+ *                openForLine: true,
+ *            },
+ *        };
+ *    Surround.exec(leftchar, rightchar, condition);
+ */
+
+@set @VERSION7 = true
+
+function exec (leftchar, rightchar, conditions) {
+
+    var e = new Editor,
+        w = new Window,
+        d = new Directory,
+        str = e.SelText, // 選択文字列の確保
+        selStartString = e.GetLineString(e.SelSr),
+        selLineString = e.GetLineString(e.Row),
+        indent;
+
+    // 選択開始行の字下げを取得
+    if (e.Selected) {
+        indent = selStartString.match(/^\s*/);
+    } else {
+        indent = selLineString.match(/^\s*/);
+    }
+
+    if (e.Selected && e.SelSc == 0) { // 行頭から選択時
+
+        // 選択した範囲すべて字下げ
+        e.TabIndent();
+        
+        // 選択範囲を挟み文字で囲み、
+        // あわせて挟み文字それぞれの各行を字下げを調整
+        e.SelText = indent + leftchar + "\n"
+                + e.SelText + "\n"
+                + indent + rightchar;
+        
+        // カーソル位置の調整
+        e.Row = e.Row - 1;
+        e.Col = e.Col - 1;
+
+    } else if (e.Selected) { // 文字列選択時
+
+        // 選択範囲を挟み文字で囲み、あわせて選択文字列の一行化と、
+        // 選択文字列、閉じ側挟み文字のある各行の字下げを調整
+        e.SelText = leftchar + "\n"
+                + indent + e.SelText + "\n"
+                + indent + rightchar;
+
+        // カーソル位置の調整
+        e.Row = e.Row - 1;
+        e.Col = e.Col - 1;
+
+        // 文字列を一行化したため、ここで字下げ
+        e.TabIndent();
+
+    } else { // 文字列選択なしの場合
+
+        // 設定した予約語などにマッチする行であれば改行と字下げを行う
+        if (!isNull(conditions)
+                && conditions.hasKey(w.FileOptionName)
+                && conditions[w.FileOptionName].hasKey("reservedWords")) {
+
+            var re = new RegExp(conditions[w.FileOptionName]["reservedWords"].join('|'));
+
+            if(re.test(selLineString)) {
+
+                e.SelText = leftchar + "\n"
+                        + indent + "\n"
+                        + indent + rightchar;
+                e.Row = e.Row - 1;
+                sleep(180); // 苦肉の策
+
+                e.TabIndent();
+
+            } else { // 挟み文字２つを出力し、その間にカーソルを運ぶ
+
+                e.SelText = leftchar + rightchar;
+                e.Col = e.Col - 1;
+
+            }
+
+        } else {
+
+                e.SelText = leftchar + rightchar;
+                e.Col = e.Col - 1;
+
+        }
+    }
+}

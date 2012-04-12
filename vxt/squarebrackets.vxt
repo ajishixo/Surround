@@ -1,0 +1,8 @@
+object TToolData
+  Title = 'squarebrackets'
+  ExeFile = 'Tool\surround\squarebrackets.dms'
+  Visible = False
+  PopVisible = False
+  ShortCut = 219
+  InitFlg = True
+end

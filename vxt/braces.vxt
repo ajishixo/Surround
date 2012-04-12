@@ -1,0 +1,8 @@
+object TToolData
+  Title = 'braces'
+  ExeFile = 'Tool\surround\braces.dms'
+  Visible = False
+  PopVisible = False
+  ShortCut = 8411
+  InitFlg = True
+end

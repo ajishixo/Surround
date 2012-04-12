@@ -1,0 +1,17 @@
+/*
+ *  braces.dms      by ajishixo     2012”N04Œ11“ú
+ */
+
+import Surround;
+
+var leftchar = "{",
+    rightchar = "}",
+    condition = {
+        'DMS‚Ìİ’è': {
+            reservedWords: [
+                 'class', 'function', 'if', 'else', 'for', 'while'
+            ]
+        }
+    };
+
+Surround.exec(leftchar, rightchar, condition);
